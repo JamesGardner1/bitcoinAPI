@@ -1,6 +1,20 @@
 import requests
 
 
+def main():
+    bitcoin = get_bitcoin_amount()
+    converted = convert_bitcoin_to_dollars
+
+def get_bitcoin_amount():
+    ''' Get Bitcoin Value '''
+    return int(input('How much bitcoin do you possess?'))
+
+def request_rates():
+    data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
+    return data
+
+def bitcoin_dollar_amount():
+    
 
 def main():
     data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
