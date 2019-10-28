@@ -3,7 +3,8 @@ import requests
 
 def main():
     bitcoin = get_bitcoin_amount()
-    converted = convert_bitcoin_to_dollars
+    converted = convert_bitcoin_to_dollars()
+    display_results(bitcoin, converted)
 
 def get_bitcoin_amount():
     ''' Get Bitcoin Value '''
@@ -14,25 +15,24 @@ def request_rates():
     return data
 
 def bitcoin_dollar_amount():
-    
+    response = request_rates()
+    rate = extract_rate()
+    return rate
 
-def main():
-    data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
-    bitValue = data['bpi']['USD']['rate_float']
+def convert_bitcoin_to_dollars(bitcoin):
+    rate = extract_rate()
+    converted = convert(bitcoin, rate)
+    return converted
 
+def extract_rate():
+    return data['bpi']['USD']['rate_float']
 
-    print(bitValue)
+def convert(bitcoin, rate):
+    ''' Convert bitcoin to USD '''
+    return bitcoin * rate
 
-    bitcoinAmount = input('How much bitcoin do you possess?')
-
-    bitcoin = int(bitcoinAmount)
-
-    rate = float(bitValue)
-
-    usConvert = bitcoin * rate
-
-    print('That is ' + str(usConvert) + ' dollars!')
-
-
+def display_results(bitcoin, converted):
+    ''' Format and Display results. '''
+    print(f'{bitcoin} bitcoin is equal to {converted:.2f} USD!')
 
 main()
